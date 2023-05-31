@@ -1,0 +1,17 @@
+[
+    {
+      "id": 1,
+      "fullName": "IMRAN KHAN",
+      "PartyName": "PTI",
+      "phoneNumber": "03xxxxxxxxx",
+      "CNIC": "*****-*******-*"
+    },
+    {
+      "id": 2,
+      "fullName": "Nawaz Sharif",
+      "PartyName": "PMLN",
+      "phoneNumber": "03xxxxxxxxx",
+      "CNIC": "*****-*******-*"
+    }
+   
+  ]

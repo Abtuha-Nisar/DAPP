@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@metamask/providers": "^10.2.1",
+    "@truffle/contract": "^4.6.15",
+    "eslint-config-react-app": "^7.0.1",
+    "web3": "^1.10.0"
+  }
+}
