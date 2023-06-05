@@ -1,15 +1,15 @@
 [
     {
       "id": 1,
-      "fullName": "Raja Hammad Ahsan",
+      "fullName": "Asad Umer",
       "phoneNumber": "03xxxxxxxxx",
       "CNIC": "*****-*******-*"
     },
     {
       "id": 2,
-      "fullName": "Abtuha Bin Nisar",
-      "phoneNumber": "03327383887",
-      "CNIC": "42501-5144656-9"
+      "fullName": "Shahid Khaqan Abbasi",
+      "phoneNumber": "033xxxxxxxxxx",
+      "CNIC": "*****-*******-*"
     }
 
   ]

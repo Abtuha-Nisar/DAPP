@@ -20,13 +20,13 @@ const Login = () => {
         console.log("Clicked");
         // Validate CNIC number
         if (cnic.length !== 13) {
-            alert('Please enter a valid CNIC number (13 digits).');
+            toast.error('Please enter a valid CNIC number (13 digits).');
             return;
         }
 
         // Check if any input field is empty
         if (!cnic || !phonenumber || !password) {
-            alert('Please enter all the required fields.');
+            toast.error('Please enter all the required fields.');
             return;
         }
 

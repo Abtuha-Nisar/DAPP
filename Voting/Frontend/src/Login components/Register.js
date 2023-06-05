@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { toast } from 'react-toastify';
 
 const Register = () => {
     const [cnic, setCnic] = useState('');
@@ -62,44 +63,44 @@ const Register = () => {
         e.preventDefault();
 
         if (!validateCNIC(cnic)) {
-            alert("Please enter a valid CNIC (13 digits and only numbers).");
+            toast.error("Please enter a valid CNIC (13 digits and only numbers).");
             return;
         }
 
         if (!validateName(name)) {
-            alert("Please enter a name in capital letters.");
+            toast.error("Please enter a name in capital letters.");
             return;
         }
 
         if (!validatePhoneNumber(phonenumber)) {
-            alert("Please enter a valid phone number.");
+            toast.error("Please enter a valid phone number.");
             return;
         }
 
         if (!validateDOB(dob)) {
-            alert("Please enter a valid date of birth.");
+            toast.error("Please enter a valid date of birth.");
             return;
         }
 
         if (!validateEmail(email)) {
-            alert("Please enter a valid email address.");
+            toast.error("Please enter a valid email address.");
             return;
         }
 
         if (!validatePassword(password)) {
-            alert("Please enter a valid password.");
+            toast.error("Please enter a valid password.");
             return;
         }
 
         if (!validateConfirmPassword(confirmPassword)) {
-            alert("Password and confirm password do not match.");
+            toast.error("Password and confirm password do not match.");
             return;
         }
 
         try {
             const response = await axios.get(`http://localhost:4000/user/check?cnic=${cnic}&email=${email}`);
             if (response.data.exists) {
-                alert("This data is already registered.");
+                toast.error("This data is already registered.");
                 return;
             }
         } catch (error) {
@@ -111,7 +112,7 @@ const Register = () => {
         try {
             const metamaskIdResponse = await axios.get(`http://localhost:4000/user/checkMetamaskId?metamaskid=${metamaskAccount}`);
             if (metamaskIdResponse.data.exists) {
-                alert("This Metamask ID is already registered.");
+                toast.error("This Metamask ID is already registered.");
                 return;
             }
         } catch (error) {

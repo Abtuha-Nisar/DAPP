@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import bgImg from "../assests/img7.jpg";
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 // Import Font Awesome library
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,13 +18,13 @@ const Adminlogin = () => {
         e.preventDefault();
 
         if (!cnic || !password) {
-            alert("Please enter CNIC and password.");
+            toast.error("Please enter CNIC and password.");
             return;
         }
 
         // Validate CNIC number
         if (cnic !== "4250151446569" && cnic !== "611045723418767") {
-            alert("Invalid CNIC. Please enter a valid CNIC number.");
+            toast.error("Invalid CNIC. Please enter a valid CNIC number.");
             return;
         }
 
@@ -35,16 +36,16 @@ const Adminlogin = () => {
         axios.post('http://localhost:4000/admin/Login_Admin', data)
             .then(response => {
                 if (response.data.success) {
-                    alert("Login successful!");
+                    toast.success("Login successful!");
                     // Redirect to the admin page
                     history.push('/AdminDashboard');
                 } else {
-                    alert("Invalid CNIC or password. Please enter correct data.");
+                    toast.error("Invalid CNIC or password. Please enter correct data.");
                 }
             })
             .catch(error => {
                 console.log(error);
-                alert("An error occurred during login.");
+                toast.error("An error occurred during login.");
             });
     };
 
@@ -85,11 +86,18 @@ const Adminlogin = () => {
                                     onClick={togglePasswordVisibility}
                                 />
                             </div>
-                            <div>
-                                <button type="submit" class="text-white rounded-3xl bg-green-600 sm:bg-green-600 px-8 py-3 sm:px-8 sm:py-3">
-                                    Open Admin panel
+
+                            <div className="flex justify-evenly">
+                                <button type="submit" className="text-white rounded-full bg-green-600 sm:bg-green-600 px-4 py-4 sm:px-4 sm:py-2">
+                                    Admin Panel
                                 </button>
+                                <Link to="/">
+                                    <button type="submit" className="text-white rounded-full bg-green-600 sm:bg-green-600 px-4 py-4 sm:px-4 sm:py-2">
+                                        Home page
+                                    </button>
+                                </Link>
                             </div>
+
                         </form>
                     </div>
                     <div className="xl:col-2 md:col-2 sm:flex hidden">

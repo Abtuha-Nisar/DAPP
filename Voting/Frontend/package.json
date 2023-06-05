@@ -16,6 +16,8 @@
     "@truffle/hdwallet-provider": "^2.1.6",
     "assert": "^2.0.0",
     "axios": "^1.4.0",
+    "caniuse-lite": "^1.0.30001494",
+    "ethers": "^5.7.2",
     "json": "^11.0.0",
     "migrate": "^1.8.0",
     "react": "^18.2.0",
@@ -28,6 +30,7 @@
     "recharts": "^2.2.0",
     "suit": "^0.4.0",
     "truffle": "^5.7.5",
+    "truffle-contract": "^4.0.31",
     "web-vitals": "^3.3.1",
     "web3": "^1.10.0",
     "webpack": "^5.82.1"
