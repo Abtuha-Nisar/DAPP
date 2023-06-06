@@ -51,6 +51,7 @@
 // };
 
 // module.exports = { verifyToken, verifyAdmin };
+
 const jwt = require("jsonwebtoken");
 const config = require("../config/config");
 
@@ -101,6 +102,7 @@ const verifyAdmin = async (req, res, next) => {
   } catch (error) {
     return res.status(404).json({ success: false, msg: "Invalid token." });
   }
+
 };
 
 module.exports = { verifyToken, verifyAdmin };

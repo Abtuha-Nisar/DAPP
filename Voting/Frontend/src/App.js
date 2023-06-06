@@ -91,8 +91,7 @@ const App = () => {
 
   return (
     <>
-      <ToastContainer
-      />
+      <ToastContainer />
       <div className='App' >
         {/* <p> Account:{account ? account : "not connected"} </p> */}
         <Router>

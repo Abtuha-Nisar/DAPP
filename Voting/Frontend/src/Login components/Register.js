@@ -5,8 +5,10 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { toast } from 'react-toastify';
-
+import { useHistory } from 'react-router-dom';
 const Register = () => {
+    const history = useHistory();
+
     const [cnic, setCnic] = useState('');
     const [name, setName] = useState('');
     const [dob, setDOB] = useState('');
@@ -16,6 +18,7 @@ const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
+    //valid cnic
     const validateCNIC = (cnic) => {
         return cnic.length === 13 && /^\d+$/.test(cnic);
     };
@@ -23,20 +26,27 @@ const Register = () => {
     const validateName = (name) => {
         return name.toUpperCase() === name;
     };
-
     const validatePhoneNumber = (phoneNumber) => {
-        // Apply any specific validation logic for phone number
-        return true;
+        // Remove any non-digit characters from the phone number
+        const cleanedPhoneNumber = phoneNumber.replace(/\D/g, '');
+
+        // Check if the cleaned phone number is exactly 11 digits
+        return cleanedPhoneNumber.length === 11;
     };
+
 
     const validateDOB = (dob) => {
         // Apply any specific validation logic for date of birth
         return true;
     };
 
+
     const validateEmail = (email) => {
-        // Apply any specific validation logic for email
-        return true;
+        // Regular expression pattern for email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // Check if the email matches the regex pattern
+        return emailRegex.test(email);
     };
 
     const validatePassword = (password) => {
@@ -60,35 +70,64 @@ const Register = () => {
     };
 
     const registerUser = async (e) => {
-        e.preventDefault();
 
+        e.preventDefault();
+        if (!cnic) {
+            toast.error("Please enter CNIC.");
+            return;
+        }
         if (!validateCNIC(cnic)) {
             toast.error("Please enter a valid CNIC (13 digits and only numbers).");
             return;
         }
-
+        // Validate Name
+        if (!name) {
+            toast.error("Please enter Name.");
+            return;
+        }
         if (!validateName(name)) {
             toast.error("Please enter a name in capital letters.");
             return;
         }
-
+        // Validate Phone Number
+        if (!phonenumber) {
+            toast.error("Please enter Phone Number.");
+            return;
+        }
         if (!validatePhoneNumber(phonenumber)) {
             toast.error("Please enter a valid phone number.");
             return;
         }
-
+        // Validate Date of Birth
+        if (!dob) {
+            toast.error("Please enter Date of Birth.");
+            return;
+        }
         if (!validateDOB(dob)) {
             toast.error("Please enter a valid date of birth.");
             return;
         }
-
+        // Validate Email
+        if (!email) {
+            toast.error("Please enter Email.");
+            return;
+        }
         if (!validateEmail(email)) {
             toast.error("Please enter a valid email address.");
             return;
         }
-
+        // Validate Password
+        if (!password) {
+            toast.error("Please enter Password.");
+            return;
+        }
         if (!validatePassword(password)) {
             toast.error("Please enter a valid password.");
+            return;
+        }
+        // Validate Confirm Password
+        if (!confirmPassword) {
+            toast.error("Please enter Confirm Password.");
             return;
         }
 
@@ -96,29 +135,7 @@ const Register = () => {
             toast.error("Password and confirm password do not match.");
             return;
         }
-
-        try {
-            const response = await axios.get(`http://localhost:4000/user/check?cnic=${cnic}&email=${email}`);
-            if (response.data.exists) {
-                toast.error("This data is already registered.");
-                return;
-            }
-        } catch (error) {
-            console.log("error", error);
-        }
-
         const metamaskAccount = await getMetamaskAccount();
-
-        try {
-            const metamaskIdResponse = await axios.get(`http://localhost:4000/user/checkMetamaskId?metamaskid=${metamaskAccount}`);
-            if (metamaskIdResponse.data.exists) {
-                toast.error("This Metamask ID is already registered.");
-                return;
-            }
-        } catch (error) {
-            console.log("error", error);
-        }
-
         try {
             const result = await axios.post("http://localhost:4000/user/register", {
                 cnic: cnic,
@@ -131,12 +148,22 @@ const Register = () => {
                 metamaskid: metamaskAccount
             });
 
-            console.log("result:", result);
-            alert(result.data.msg);
+            // Handle the server response
+            if (result.data.success) {
+                toast.success('Registration successful');
+                history.push('/RegisterOTP');
+            } else {
+                toast.error(result.data.error);
+            }
         } catch (error) {
-            console.log("error", error);
+            console.error('Registration error:', error);
+            toast.warn("already Register")
+            toast.error('An error occurred during registration');
+
         }
+
     };
+
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -246,7 +273,7 @@ const Register = () => {
                                     </button>
                                 </div>
 
-                                <div>
+                                {/* <div>
                                     <Link to="/RegisterOTP">
                                         <button
                                             className="text-white rounded-3xl bg-green-600 px-8 py-3"
@@ -254,7 +281,7 @@ const Register = () => {
                                             Next
                                         </button>
                                     </Link>
-                                </div>
+                                </div> */}
                             </div>
 
                             <div className="links text-green-600">

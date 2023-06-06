@@ -49,10 +49,61 @@ const userProfile = async (req, res) => {
 };
 //Register
 
+// const register_user = async (req, res) => {
+//     try {
+//         if (req.body.password === req.body.confirmpassword) {
+//             const spassword = await securePassword(req.body.password);
+//             const user = new User({
+//                 name: req.body.name,
+//                 cnic: req.body.cnic,
+//                 email: req.body.email,
+//                 dob: req.body.dob,
+//                 phonenumber: req.body.phonenumber,
+//                 password: spassword,
+//                 metamaskid: req.body.metamaskid,
+//             });
+
+//             const userData = await User.findOne({ email: req.body.email });
+//             if (userData) {
+//                 res.status(200).send({ success: false, msg: "This email already exists!" });
+//             }
+//             else {
+//                 const user_data = await user.save();
+//                 res.status(200).send({ success: true, data: user_data });
+//             }
+
+//         }
+//         else {
+//             res.status(400).send({ success: false, msg: "Password Doesnot match" });
+//         }
+
+//     } catch (error) {
+//         res.status(400).send(error.message);
+//     }
+// }
 const register_user = async (req, res) => {
     try {
         if (req.body.password === req.body.confirmpassword) {
             const spassword = await securePassword(req.body.password);
+
+            // Check if the email already exists
+            const emailExists = await User.findOne({ email: req.body.email });
+            if (emailExists) {
+                return res.status(400).send({ success: false, msg: "This email already exists!" });
+            }
+
+            // Check if the CNIC already exists
+            const cnicExists = await User.findOne({ cnic: req.body.cnic });
+            if (cnicExists) {
+                return res.status(400).send({ success: false, msg: "This CNIC already exists!" });
+            }
+
+            // Check if the phone number already exists
+            const phoneNumberExists = await User.findOne({ phonenumber: req.body.phonenumber });
+            if (phoneNumberExists) {
+                return res.status(400).send({ success: false, msg: "This phone number already exists!" });
+            }
+
             const user = new User({
                 name: req.body.name,
                 cnic: req.body.cnic,
@@ -63,25 +114,15 @@ const register_user = async (req, res) => {
                 metamaskid: req.body.metamaskid,
             });
 
-            const userData = await User.findOne({ email: req.body.email });
-            if (userData) {
-                res.status(200).send({ success: false, msg: "This email already exists!" });
-            }
-            else {
-                const user_data = await user.save();
-                res.status(200).send({ success: true, data: user_data });
-            }
-
+            const user_data = await user.save();
+            res.status(200).send({ success: true, data: user_data });
+        } else {
+            res.status(400).send({ success: false, msg: "Password does not match" });
         }
-        else {
-            res.status(400).send({ success: false, msg: "Password Doesnot match" });
-        }
-
     } catch (error) {
         res.status(400).send(error.message);
     }
-}
-
+};
 //login check
 const user_login = async (req, res) => {
     try {

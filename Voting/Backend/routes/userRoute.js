@@ -23,4 +23,5 @@ router.post('/send-otp', user_controller.send_otp);
 router.post('/verify-otp', user_controller.verify_otp);
 // Cast vote
 router.post("/cast_vote", verifyToken, user_controller.cast_vote);
+
 module.exports = router;

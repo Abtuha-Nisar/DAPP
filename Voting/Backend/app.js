@@ -2,7 +2,7 @@
 // require("../src/db/conn")
 // const jwt = require("jsonwebtoken")
 // const MensRanking = require("../src/models/mens");
-// const router = require("./routers/index") 
+// const router = require("./routers/index")
 // //const Register = require (../src/component/Signin)
 // //const static_path = path.join(_dirname, "../public")
 // //const src_path = path.join(_dirname, "../src/assests")

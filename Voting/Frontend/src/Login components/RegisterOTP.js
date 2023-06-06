@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import bgImg from '../assests/img7.jpg';
 import { toast } from 'react-toastify';
@@ -47,7 +47,7 @@ const RegisterOTP = ({ history }) => {
                 console.log('OTP verification successful');
                 setIsVerified(true);
                 toast.success('OTP verification successful');
-                history.push('/Register'); // Redirect to register page
+                history.push('/Dashboard'); // Redirect to register page
             } else {
                 console.log('OTP verification successfully:', response.data.message);
                 setIsVerified(false);
@@ -126,6 +126,10 @@ const RegisterOTP = ({ history }) => {
                                         Previous
                                     </button>
                                 </Link>
+
+                            </div>
+                            <div className="links text-green-600">
+                                <Link to="/Login">Login to an account?</Link>
                             </div>
                         </div>
                     </div>
@@ -138,4 +142,4 @@ const RegisterOTP = ({ history }) => {
     );
 };
 
-export default RegisterOTP;
+export default withRouter(RegisterOTP);
