@@ -2,12 +2,24 @@ import React from "react";
 
 const ReadOnlyRow = ({ contact, handleEditClick, handleDeleteClick }) => {
     return (
-        <tr class=" bg-green-200">
+        <tr className="bg-green-200">
             <td>{contact.candidate_name}</td>
-            <td> {contact.partyname}</td>
+            <td>{contact.partyname}</td>
             <td>{contact.phonenumber}</td>
             <td>{contact.cnic}</td>
-            <td class="justify-content: space-evenly">
+            <td className="border-2 border-black">
+                <img
+                    src={contact.image}
+                    alt=""
+                    style={{
+                        display: "block",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        maxWidth: "50px",
+                    }}
+                />
+            </td>
+            <td className="justify-content: space-evenly">
                 <button
                     className="text-green-600"
                     type="button"
@@ -18,11 +30,11 @@ const ReadOnlyRow = ({ contact, handleEditClick, handleDeleteClick }) => {
                 <button
                     className="text-green-500"
                     type="button"
-                    onClick={() => handleDeleteClick(contact.id)}
+                    onClick={() => handleDeleteClick(contact._id)}
+
                 >
                     Delete
                 </button>
-
             </td>
         </tr>
     );

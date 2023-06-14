@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import bgImg from "../assests/img7.jpg";
 import axios from 'axios';
-
+import { toast } from 'react-toastify';
 const ForgetPassword = () => {
     const history = useHistory();
     const [email, setEmail] = useState('');
@@ -20,11 +20,11 @@ const ForgetPassword = () => {
             const response = await axios.post(resetPasswordUrl, data);
             console.log('Password reset successful', response.data);
 
-            window.alert('Reset link sent to your email!');
-            history.push('/Login');
+            toast.success('Reset link sent to your email!');
+            history.push('/ResetPassword');
         } catch (error) {
             console.error('Password reset failed:', error.response.data);
-            window.alert('Failed to send reset link to your email.');
+            toast.error('Failed to send reset link to your email.');
         }
     };
 
@@ -32,7 +32,7 @@ const ForgetPassword = () => {
         e.preventDefault();
 
         if (email.trim() === '') {
-            window.alert('Please enter your email address.');
+            toast.warn('Please enter your email address.');
             return;
         }
 

@@ -139,20 +139,19 @@ const displayResult = async (req, res) => {
   }
 };
 
-// const candiname = (req, res) => {
-//   // candidatename
-//   try {
-//     const candidate_name = req.body.candidate_name;
-//     res.status(200).json({ success: true, candidate_name });
-//   } catch (err) {
-//     // Process the uploaded image and voter name as needed
-//     // ...
-//     res.status(500).json({ success: false, msg: "CAnnot get the candidate name" });
-//     // Send the file name and voter name as a response
 
-//   }
-//};
+//Display all registered users
+const displayUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    const userCount = users.length; // Get the count of registered users
+    const message = `Total users: ${userCount}`;
+    res.status(200).json({ message, users });
 
+  } catch (error) {
+    res.status(500).json({ success: false, msg: "Internal server error" });
+  }
+};
 
 
 
@@ -165,6 +164,6 @@ module.exports = {
   displayResult,
   Login_Admin,
   display_voters,
-
+  displayUsers,
 
 }

@@ -23,8 +23,8 @@ import ForgetPassword from './Login components/ForgetPassword';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ResetPassword from './Login components/ResetPassword';
 
-//import { loadContract } from './utils/load-contract';
 
 
 const App = () => {
@@ -52,27 +52,6 @@ const App = () => {
       } else {
         console.error("Please install MetaMask!");
       }
-
-      // console.log(window.web3);
-      // console.log(window.ethereum);
-      // let provider = null;
-      // if (window.ethereum) {
-      //   provider = window.ethereum;
-      //   try {
-      //     await provider.enable();
-      //   } catch {
-      //     console.error("User is not allowed");
-      //   }
-      // } else if (window.web3) {
-      //   provider = window.web3.currentProvider;
-      // } else if (!process.env.production) {
-      //   provider = new Web3.providers.HttpProvider("http://localhost:7545");
-      // }
-      // setWeb3Api({
-      //   web3: new Web3(provider),
-      //   provider,
-
-      // });
 
     };
     loadProvider();
@@ -113,7 +92,7 @@ const App = () => {
             <Route exact path='/ViewElection' component={ViewElection} />
             <Route exact path='/Candidatelist' component={Candidatelist} />
             <Route exact path='/Adminlogin' component={Adminlogin} />
-
+            <Route exact path='/ResetPassword' component={ResetPassword} />
           </Switch>
         </Router>
       </div>

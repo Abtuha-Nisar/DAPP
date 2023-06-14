@@ -4,49 +4,59 @@ const EditableRow = ({
     editFormData,
     handleEditFormChange,
     handleCancelClick,
+
 }) => {
     return (
-        <tr class="bg-green-400">
+        <tr className="bg-green-400">
             <td>
                 <input
                     type="text"
-                    required="required"
+                    required
                     placeholder="Enter a name..."
                     name="candidate_name"
                     value={editFormData.candidate_name}
                     onChange={handleEditFormChange}
-                ></input>
+                />
             </td>
             <td>
                 <input
                     type="text"
-                    required="required"
-                    placeholder="Enter an PartyName"
+                    required
+                    placeholder="Enter a Party Name..."
                     name="partyname"
                     value={editFormData.partyname}
                     onChange={handleEditFormChange}
-                ></input>
-
+                />
             </td>
             <td>
                 <input
                     type="text"
-                    required="required"
+                    required
                     placeholder="Enter a phone number..."
                     name="phonenumber"
                     value={editFormData.phonenumber}
                     onChange={handleEditFormChange}
-                ></input>
+                />
             </td>
             <td>
                 <input
                     type="text"
-                    required="required"
+                    required
                     placeholder="Enter a CNIC..."
                     name="cnic"
                     value={editFormData.cnic}
                     onChange={handleEditFormChange}
-                ></input>
+                />
+            </td>
+            <td style={{ verticalAlign: "middle", textAlign: "center" }}>
+                <label htmlFor="image">Image</label>
+                <br />
+                <input
+                    type="file"
+                    name="image"
+                    accept="image/*"
+                    onChange={handleEditFormChange}
+                />
 
             </td>
             <td>

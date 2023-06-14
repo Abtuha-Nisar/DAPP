@@ -8,8 +8,8 @@ import { ethers } from 'ethers'
 import { Voting } from '../utils/VotingSystem';
 
 
-
 const Dashboard = () => {
+
     const [isVoteCasted, setIsVoteCasted] = useState(false);
     const [isVoteLocked, setIsVoteLocked] = useState(false);
     const [candidates, setCandidates] = useState([]);
@@ -105,9 +105,11 @@ const Dashboard = () => {
     };
 
     return (
+
         <div className="bg-green-100 h-screen w-full">
 
             <nav className="bg-green-600 text-white py-2 px-4 flex items-center justify-between">
+
                 <img src={bgImg} className="w-12 h-12" alt='logo' />
                 <span className="text-xl font-bold px-4">Decentralized Voting System Using Blockchain</span>
                 <ul className="flex items-center space-x-4">
@@ -166,7 +168,7 @@ const Dashboard = () => {
                                     onClick={() => handleVote(candidate._id, candidate.candidate_name)}
                                 />
                                 <button
-                                    className="w-full bg-green-600 py-2 text-white font-bold mt-2 hover:bg-green-700 transition-colors duration-300"
+                                    className="w-full bg-green-600 py-3 px-1 text-white font-bold mt-2 hover:bg-green-700 transition-colors duration-300 rounded-3xl "
                                     onClick={() => handleVote(candidate._id, candidate.candidate_name)}
                                 >
                                     {candidate.candidate_name}
@@ -177,6 +179,7 @@ const Dashboard = () => {
                 </div>
             </main>
         </div>
+
     );
 };
 

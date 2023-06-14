@@ -35,7 +35,8 @@ router.get('/display_candidates', admin_controller.display_candidates);
 
 // display result
 router.get('/display_result', verifyAdmin, admin_controller.displayResult);
-
+//Display all registered users
+router.get("/display_users", admin_controller.displayUsers);
 
 
 module.exports = router;

@@ -37,6 +37,8 @@ const Adminlogin = () => {
             .then(response => {
                 if (response.data.success) {
                     toast.success("Login successful!");
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+                    localStorage.setItem('token', response.data.token);
                     // Redirect to the admin page
                     history.push('/AdminDashboard');
                 } else {

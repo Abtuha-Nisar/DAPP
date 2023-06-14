@@ -31,7 +31,7 @@ body{
   border-radius: 5px;
   box-shadow: 1px 3px 10px #e9ecef; 
   background-color: white;
-  
+  margin-bottom: 2em; /* Added margin-bottom */
   
 }  
 

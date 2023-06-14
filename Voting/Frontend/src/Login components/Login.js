@@ -44,6 +44,7 @@ const Login = () => {
             history.push("/dashboard");
         } catch (error) {
             console.error('Login failed:', error);
+            toast.error('Invalid login data. Please check your credentials.');
         }
     }
 
